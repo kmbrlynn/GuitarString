@@ -34,8 +34,13 @@ void RingBuffer::enqueue(int16_t x) {
 	_last++;
 	
 	// if _last falls off the end, wrap it around
-	if (_last > _capacity)
+	if (_last > _capacity-1) {
 		_last = 0;
+
+		// if this has happened and first/last indices match, it's full
+		if (_first == 0) _full = true;
+		else _full = false;
+	}
 }
 
 int16_t RingBuffer::dequeue() {
@@ -43,8 +48,12 @@ int16_t RingBuffer::dequeue() {
 	_first++;
 
 	// if _first falls off the end, wrap it around
-	if (_first > _capacity)
+	if (_first > _capacity-1)
 		_first = 0;
+
+		// if this has happened and first/last indices match, it's empty
+		if (_last == 0) _empty = true;
+		else _empty = false;
 
 	return dequeued;
 }

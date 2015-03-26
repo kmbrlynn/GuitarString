@@ -14,10 +14,8 @@ class RingBuffer {
 	int16_t peek();
 
  private:
-	int _first;
-	int _last;
-	int _capacity;
-	bool _full;
+	int _first, _last, _capacity;
+	bool _full, _empty;
 	std::vector<int16_t> _buffer;
 
 };
