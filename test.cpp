@@ -2,7 +2,6 @@
 #include <string>
 #include <exception>
 #include <stdexcept>
-
 #include "RingBuffer.hpp"
 
 #define BOOST_TEST_DYN_LINK
