@@ -1,10 +1,12 @@
 // copyright Kim Douglas 2015
+#include <vector>
 #include "RingBuffer.hpp"
 
 // ============================================================ con/destructors
-RingBuffer::RingBuffer(int capacity) : _capacity(capacity) {
-	_first = 5;
-
+RingBuffer::RingBuffer(int capacity) :
+	_first(0), _last(0), _capacity(capacity) {
+    
+	_buffer.resize(_capacity);
 }
 
 RingBuffer::~RingBuffer() {
@@ -28,14 +30,23 @@ bool RingBuffer::isFull() {
 }
 
 void RingBuffer::enqueue(int16_t x) {
-
-
+	_buffer.at(_last) = x;
+	_last++;
+	
+	// if _last falls off the end, wrap it around
+	if (_last > _capacity)
+		_last = 0;
 }
 
 int16_t RingBuffer::dequeue() {
-	_first--;
-	return _first;
+	int16_t dequeued = _buffer.at(_first);
+	_first++;
 
+	// if _first falls off the end, wrap it around
+	if (_first > _capacity)
+		_first = 0;
+
+	return dequeued;
 }
 
 int16_t RingBuffer::peek() {

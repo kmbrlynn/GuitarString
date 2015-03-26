@@ -1,5 +1,6 @@
 // copyright Kim Douglas 2015
 #include <stdint.h>
+#include <vector>
 
 class RingBuffer {
  public:
@@ -17,4 +18,6 @@ class RingBuffer {
 	int _last;
 	int _capacity;
 	bool _full;
+	std::vector<int16_t> _buffer;
+
 };
