@@ -15,18 +15,17 @@ RingBuffer::~RingBuffer() {
 
 // ========================================================= accessors/mutators
 int RingBuffer::size() {
-	//return the number of elements in the ring
+	if (_empty == true) return 0;
+	if (_full == true) return _capacity;
 
 }
 
 bool RingBuffer::isEmpty() {
-
-
+	return _empty;
 }
 
 bool RingBuffer::isFull() {
-
-
+	return _full;
 }
 
 void RingBuffer::enqueue(int16_t x) {
@@ -59,7 +58,7 @@ int16_t RingBuffer::dequeue() {
 }
 
 int16_t RingBuffer::peek() {
-
+	return _first;
 }
 
 
