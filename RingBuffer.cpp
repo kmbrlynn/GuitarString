@@ -17,11 +17,13 @@ RingBuffer::~RingBuffer() {
 int RingBuffer::size() {
 	if (_empty == true) return 0;
 	if (_full == true) return _capacity;
+	if (_last > _first) return _last - _first;
 	
-	if (_last > _first)
-		return _last - _first;
-	if (_first > _last)
-		return 
+	if (_first > _last) {
+		int end_chunk = _capacity - _first;
+		int beginning_chunk = _last - 1;
+		return end_chunk + beginning_chunk;
+	}
 }
 
 bool RingBuffer::isEmpty() {
