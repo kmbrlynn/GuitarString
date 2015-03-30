@@ -18,7 +18,7 @@ RingBuffer::RingBuffer(int capacity) {
 
     _first = 0;
     _last = 0;
-	_full = false;
+    _full = false;
     _capacity = capacity;
     _buffer.resize(_capacity);
 }
@@ -41,14 +41,14 @@ int RingBuffer::size() {
 
 bool RingBuffer::isEmpty() {
     if (_first == _last && _full == false) return true;
-	else
-		return false;
+    else
+        return false;
 }
 
 bool RingBuffer::isFull() {
     if (_first == _last && _full == true) return true;
-	else
-		return false;
+    else
+        return false;
 }
 
 int16_t RingBuffer::peek() {
@@ -56,7 +56,7 @@ int16_t RingBuffer::peek() {
         throw
             std::runtime_error(peek_error);
     else
-		return _first;
+        return _first;
 }
 
 // =================================================================== mutators
@@ -73,8 +73,8 @@ void RingBuffer::enqueue(int16_t x) {
         _last = 0;
 
     // if _last and _first are the same after enqueueing, it's full
-    if (_last == _first) 
-		_full = true;
+    if (_last == _first)
+        _full = true;
 }
 
 int16_t RingBuffer::dequeue() {
@@ -90,8 +90,8 @@ int16_t RingBuffer::dequeue() {
         _first = 0;
 
     // if _first and _last are the same after dequeuing, it's empty
-    if (_first == _last) 
-		_full = false;
+    if (_first == _last)
+        _full = false;
 
     return dequeued;
 }

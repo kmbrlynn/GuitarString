@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(RingBuffer_peek) {
 
     rb.enqueue(2);
     rb.dequeue();
-  
+
     BOOST_REQUIRE_THROW(rb.peek(), std::runtime_error);
 }
 
