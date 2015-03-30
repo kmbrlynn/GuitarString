@@ -34,12 +34,22 @@ BOOST_AUTO_TEST_CASE(RingBufferEnqueue_dequeue) {
     BOOST_REQUIRE_THROW(rb.dequeue(), std::runtime_error);
 }
 
-BOOST_AUTO_TEST_CASE(RingBuffer_peek) {
+BOOST_AUTO_TEST_CASE(RingBuffer_peek_full_empty) {
     RingBuffer rb(3);
 
     rb.enqueue(2);
+    rb.enqueue(1);
+    rb.enqueue(0);
+
+    BOOST_REQUIRE(rb.peek() == 2);
+    BOOST_REQUIRE(rb.isFull() == true);
+    BOOST_REQUIRE(rb.size() == 3);
+
+    rb.dequeue();
+    rb.dequeue();
     rb.dequeue();
 
+    BOOST_REQUIRE(rb.isEmpty() == true);
     BOOST_REQUIRE_THROW(rb.peek(), std::runtime_error);
 }
 

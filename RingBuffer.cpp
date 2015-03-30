@@ -34,7 +34,7 @@ int RingBuffer::size() {
 
     if (_first > _last) {
         int end_chunk = _capacity - _first;
-        int beginning_chunk = _last - 1;
+        int beginning_chunk = _last;
         return end_chunk + beginning_chunk;
     }
 }
@@ -56,7 +56,7 @@ int16_t RingBuffer::peek() {
         throw
             std::runtime_error(peek_error);
     else
-        return _first;
+        return _buffer.at(_first);
 }
 
 // =================================================================== mutators
