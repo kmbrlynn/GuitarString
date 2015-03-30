@@ -28,8 +28,8 @@ RingBuffer::~RingBuffer() {
 
 // ================================================================== accessors
 int RingBuffer::size() {
-    if (_full == false) return 0;
-    if (_full == true) return _capacity;
+    if (isEmpty()) return 0;
+    if (isFull()) return _capacity;
     if (_last > _first) return _last - _first;
 
     if (_first > _last) {
