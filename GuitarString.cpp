@@ -8,12 +8,21 @@ const int SAMPLING_RATE = 44100;
 // ============================================================ con/destructors
 GuitarString::GuitarString(double frequency) {
 	_n = ceil(SAMPLING_RATE/frequency);
+	_rb = new RingBuffer(_n);
 
+	while (_rb->isFull() == false) {
+		_rb->enqueue(0);
+	}
 
 }
 
-GuitarString::GuitarString(std::vector<sf::Int16>) {
+GuitarString::GuitarString(std::vector<sf::Int16> init) {
+	_rb = new RingBuffer(init.size());
 
+	std::vector<sf::Int16>::iterator it;
+	for (it = init.begin(); it != init.end(); ++it) {
+		_rb->enqueue(*it);
+	}
 }
 
 GuitarString::~GuitarString() {
@@ -31,7 +40,13 @@ int GuitarString::time() {
 
 // =================================================================== mutators
 void GuitarString::pluck() {
+	while (_rb->isEmpty() != true) {
+		_rb->dequeue();
+	}
 
+	for (int i = 0; i < _n; i++) {
+		_rb->enqueue((sf::Int16)(rand() & 0xffff));
+	}
 }
 
 void GuitarString::tic() {
