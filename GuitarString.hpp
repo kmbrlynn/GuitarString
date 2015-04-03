@@ -6,12 +6,13 @@ class GuitarString {
  public:
  	GuitarString(double frequency);
 	GuitarString(std::vector<sf::Int16> init);
-	
-	void pluck();
-	void tic();
+	~GuitarString();
 
 	sf::Int16 sample();
 	int time();
+
+	void pluck();
+	void tic();
 
  private:
 	RingBuffer* _rb;
