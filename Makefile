@@ -1,16 +1,19 @@
 CC = g++
 CFLAGS = -Wall -Werror -ansi -pendantic -g
 
-all: ps5a
+all: GuitarHero
 
-ps5a: test.o RingBuffer.o
-	$(CC) $(FLAGS) -o ps5a test.o RingBuffer.o -lboost_unit_test_framework
+GuitarHero: GuitarHeroLite.o GuitarString.o RingBuffer.o
+	$(CC) $(FLAGS) -o GuitarHero GuitarHeroLite.o GuitarString.o RingBuffer.o -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
-test.o: test.cpp RingBuffer.cpp RingBuffer.hpp
-	$(CC) $(FLAGS) -c test.cpp
+GuitarHeroLite.o: GuitarHeroLite.cpp GuitarString.cpp GuitarString.hpp RingBuffer.cpp RingBuffer.hpp
+	$(CC) $(FLAGS) -c GuitarHeroLite.cpp
+
+GuitarString.o: GuitarString.cpp GuitarString.hpp RingBuffer.cpp RingBuffer.hpp
+	$(CC) $(FLAGS) -c GuitarString.cpp
 
 RingBuffer.o: RingBuffer.cpp RingBuffer.hpp
 	$(CC) $(FLAGS) -c RingBuffer.cpp
 
 clean:
-	rm -rf ps5a *.o *.~
+	rm -rf GuitarHero *.o *.~
