@@ -31,7 +31,7 @@ GuitarString::~GuitarString() {
 
 // ================================================================== accessors
 sf::Int16 GuitarString::sample() {
-
+	return _rb->peek();
 }
 
 int GuitarString::time() {
@@ -50,6 +50,11 @@ void GuitarString::pluck() {
 }
 
 void GuitarString::tic() {
+	sf::Int16 first = _rb->dequeue();
+	sf::Int16 second = _rb->peek();
+
+	sf::Int16 decayed = 0.996 * (first + second) / 2;
+	_rb->enqueue(decayed);
 
 }
 
