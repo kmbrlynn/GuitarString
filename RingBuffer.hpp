@@ -1,4 +1,6 @@
 // copyright Kim Douglas 2015
+#ifndef RING_BUF_H
+#define RING_BUF_H
 #include <stdint.h>
 #include <vector>
 
@@ -18,3 +20,5 @@ class RingBuffer {
     bool _full;  // false = empty
     std::vector<int16_t> _buffer;
 };
+
+#endif

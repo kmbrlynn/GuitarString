@@ -1,4 +1,6 @@
 // copyright Kim Douglas 2015
+#ifndef GUITAR_STRING_H
+#define GUITAR_STRING_H
 #include <SFML/Audio.hpp>
 #include "RingBuffer.hpp"
 
@@ -18,3 +20,5 @@ class GuitarString {
 	RingBuffer* _rb;
 	int _n, _t;
 };
+
+#endif
