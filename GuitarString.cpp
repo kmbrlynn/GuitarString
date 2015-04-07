@@ -35,7 +35,7 @@ sf::Int16 GuitarString::sample() {
 }
 
 int GuitarString::time() {
-
+	return _t;
 }
 
 // =================================================================== mutators
@@ -55,7 +55,7 @@ void GuitarString::tic() {
 
 	sf::Int16 decayed = 0.996 * (first + second) / 2;
 	_rb->enqueue(decayed);
-
+	_t++;
 }
 
 

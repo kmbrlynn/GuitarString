@@ -16,5 +16,5 @@ class GuitarString {
 
  private:
 	RingBuffer* _rb;
-	int _n;
+	int _n, _t;
 };
