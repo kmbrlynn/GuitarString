@@ -40,11 +40,11 @@ int GuitarString::time() {
 
 // =================================================================== mutators
 void GuitarString::pluck() {
-	while (_rb->isEmpty() != true) {
+	while (_rb->isEmpty() == false) {
 		_rb->dequeue();
 	}
 
-	for (int i = 0; i < _n; i++) {
+	while(_rb->isFull() == false) {
 		_rb->enqueue((sf::Int16)(rand() & 0xffff));
 	}
 }
