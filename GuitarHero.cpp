@@ -28,16 +28,16 @@
 #define CONCERT_A 220.0
 #define SAMPLES_PER_SEC 44100
 
-std::vector<sf::Int16> makeSamplesFromString(GuitarString* gs) {
+std::vector<sf::Int16> makeSamplesFromString(GuitarString& gs) {
 	std::vector<sf::Int16> samples;
-	gs->pluck();
+	gs.pluck();
 	int duration = 8;
 	int i;
 
 	for (int i = 0; i < SAMPLES_PER_SEC * duration; i++)
 	{
-		gs->tic();
-		samples.push_back(gs->sample());
+		gs.tic();
+		samples.push_back(gs.sample());
 	}
 
 	return samples;
@@ -59,11 +59,11 @@ int main(int argc, char* argv[]) {
 
 	for (unsigned int i = 0; i < 37; i++)
 	{
-		GuitarString* gstring;
+		GuitarString gstring(freq);
 		sf::Sound sound;
 		sf::SoundBuffer buffer;
-		gstring = new GuitarString(freq);
-		
+
+//		gstring = new GuitarString(freq);	
 		samplevect.push_back(makeSamplesFromString(gstring));
 		
 		if (!buffer.loadFromSamples(&samplevect[i][0], samplevect[i].size(), 2, SAMPLES_PER_SEC))
